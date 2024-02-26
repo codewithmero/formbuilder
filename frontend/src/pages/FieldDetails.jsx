@@ -59,7 +59,7 @@ function FieldDetails({ setStep, formData, setFormData }) {
           steps: !c.steps.includes("field_details") ? [...c.steps, "field_details"] : [...c.steps]
         }))
         setIsContentChanged(false);
-        window.location.href="/form";
+        window.location.href="/";
       }
     } catch(err) {
       console.log("Error - while saving form fields:::", err);

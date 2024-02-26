@@ -3,13 +3,13 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-function useFetchForms() {
+function useFetchForms(formType) {
   const [forms, setForms] = useState([]);
   const [errors, setErrors] = useState(null);
 
   const fetchAllForms = useCallback(async () => {
     try { 
-      let response = await axios.get(`${process.env.REACT_APP_BASE_URL}/forms`);
+      let response = await axios.get(`${process.env.REACT_APP_BASE_URL}/forms/tabs/${formType}`);
 
       const { success, forms } = response.data;
 
@@ -20,11 +20,11 @@ function useFetchForms() {
       console.log("Error - while fetching forms:::", err);
       setErrors("Unable to fetch forms!");
     }
-  }, []);
+  }, [formType]);
 
   useEffect(() => {
     fetchAllForms();
-  }, [fetchAllForms]);
+  }, [formType, fetchAllForms]);
 
   return {
     errors, forms

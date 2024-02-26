@@ -105,7 +105,43 @@ const createNewForm = asyncHandler(async (req, res) => {
 }); 
 
 const getAllForms = asyncHandler(async (req, res) => {
-  let forms = JSON.parse(JSON.stringify(await Form.find().select({
+  let forms = JSON.parse(JSON.stringify(await Form.find({
+  }).select({
+    _id: 1,
+    title: 1,
+    start_date: 1,
+    end_date: 1,
+    createdAt: 1
+  })));
+
+  forms = forms.map(item => ({
+    ...item,
+    start_date: moment(item.start_date).format("DD/MM/YYYY"),
+    end_date: moment(item.end_date).format("DD/MM/YYYY"),
+    createdAt: moment(item?.createdAt).format("DD/MM/YYYY")
+  }))
+
+  return res.status(200)?.json({
+    success: true,
+    forms,
+    msg: "All forms have been fetched successfully."
+  });
+}); 
+
+const getAllFormsByTab = asyncHandler(async (req, res) => {
+  const { form_type } = req.params;
+  let condObj = {};
+  if(form_type === "forms_to_complete") {
+    condObj = {
+      is_filled_once: false
+    }
+  } else if(form_type === "form_history") {
+    condObj = {
+      is_filled_once: true
+    }
+  }
+
+  let forms = JSON.parse(JSON.stringify(await Form.find(condObj).select({
     _id: 1,
     title: 1,
     start_date: 1,
@@ -207,6 +243,12 @@ const addNewFormResponse = asyncHandler(async (req, res) => {
   if(!newResponse)
     throw new Error("Unable to create new form response!");
 
+  await Form.findOneAndUpdate({
+    _id: new mongoose.Types.ObjectId(formId),
+  }, {
+    is_filled_once: true
+  });
+
   return res.status(201)?.json({
     success: true,
     response: newResponse,
@@ -232,5 +274,6 @@ export {
   getFormById,
   addNewFormResponse,
   viewAllFormResponses,
-  getFormResponseById
+  getFormResponseById,
+  getAllFormsByTab
 }

@@ -37,7 +37,7 @@ const FormBuilder = () => {
 
   return (
     <>
-      <h2 className="text-center text-4xl text-[teal] pt-8 pb-2 font-medium">Formikk</h2>
+      <h2 className="text-center text-4xl text-[teal] pt-8 pb-2 font-medium">Fill the Basic Details:</h2>
       {activePage}
     </>
   )

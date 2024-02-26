@@ -41,7 +41,7 @@ function AddEditDynamicForm() {
       const { success } = response.data;
 
       if(success) {
-        window.location.href="/form";
+        window.location.href="/";
       }
     } catch(err) {
       console.log("Error - while creating new form response:::", err);

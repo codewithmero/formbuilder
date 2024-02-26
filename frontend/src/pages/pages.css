@@ -44,3 +44,29 @@
 
   margin-right: 10px;
 }
+
+/* HOMEPAGE */
+.tabs {
+  display: flex;
+
+  justify-content: center;
+  padding: 2rem;
+}
+
+.tabs > .tab {
+  margin-right: 2rem;
+
+  color: #272727;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+.tab:last-child {
+  margin-right: 0;
+}
+
+.tab.active {
+  color: #AA0061;
+  font-weight: bold;
+  border-bottom: 4px solid #AA0061;
+}

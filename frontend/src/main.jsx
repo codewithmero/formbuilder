@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './index.css'
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import FormListing from './pages/FormListing.jsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import FormBuilder from './pages/FormBuilder.jsx'
 import Home from './pages/Home.jsx'
 import AddEditDynamicForm from './pages/AddEditDynamicForm.jsx';
@@ -15,10 +14,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-  },
-  {
-    path: "/form",
-    element: <FormListing />,
   },
   {
     path: "/form/create",

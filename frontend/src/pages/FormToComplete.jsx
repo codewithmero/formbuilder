@@ -3,17 +3,16 @@ import "./pages.css";
 import useFetchForms from "../hooks/useFetchForms";
 import { Link } from "react-router-dom";
 
-function FormListing() {
-  let { forms, errors } = useFetchForms();
+function FormToComplete() {
+  let formType="forms_to_complete";
+  let { forms, errors } = useFetchForms(formType);
 
   return (
     <div className="listing-page">
-      <div className="px-8 pt-10">
-        <h2 className="text-3xl uppercase tracking-wide text-center">Forms Management</h2>
+      <div className="px-8 py-10">
+        <h2 className="text-3xl uppercase tracking-wide text-center">{`Forms' Management`}</h2>
       </div>
-      <div className="px-8 pb-8 flex justify-end items-center justify-self-center">
-        <Link className="create-form-btn" to={"/form/create"}>Create New Form +</Link>
-      </div>
+
       <div className="px-8 form-listing">
         {
           forms?.length > 0 ? (
@@ -32,11 +31,11 @@ function FormListing() {
                 ))
               }
             </>
-          ) : null
+          ) : <p className="text-center">No forms have been created yet.</p>
         }
       </div>
     </div>
   )
 }
 
-export default FormListing
+export default FormToComplete;
