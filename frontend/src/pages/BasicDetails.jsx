@@ -108,7 +108,6 @@ const BasicDetails = ({ setStep, formData, setFormData }) => {
         </div>
 
         <div>
-          <button className="back-btn" disabled={true}>Prev</button>
           <button className="submit-btn">Next</button>
         </div>
       </form>

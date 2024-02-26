@@ -117,3 +117,16 @@
   border: 1px solid #bbb;
   border-radius: 5px;
 }
+
+/* ADD EDIT DYNAMIC FORM */
+.title {
+  padding: 2rem;
+  text-align: center;
+  padding-bottom: 0;
+}
+
+.title > h2 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

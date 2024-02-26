@@ -5,7 +5,11 @@ import {
   createNewFormType,
   getAllFormTypes,
   createNewFormCategory,
-  getAllFormCategory
+  getAllFormCategory,
+  getFormById,
+  addNewFormResponse,
+  viewAllFormResponses,
+  getFormResponseById
 } from '../controllers/form.controllers.js';
 
 const router = express.Router();
@@ -13,6 +17,16 @@ const router = express.Router();
 router.route("/")
   .post(createNewForm)
   .get(getAllForms);
+
+router.route("/:formId")
+  .get(getFormById);
+
+router.route("/response")
+  .post(addNewFormResponse)
+  .get(viewAllFormResponses);
+
+router.route("/response/:responseId")
+  .get(getFormResponseById);
 
 router.route("/type")
   .post(createNewFormType)

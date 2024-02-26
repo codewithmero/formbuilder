@@ -25,7 +25,7 @@ function FormListing() {
                       <img src="/public/assets/img/form_icon.png" alt="" />
                     </div>
                     <div className="form-details">
-                      <p>{form?.title}</p>
+                      <Link to={`/form/add/${form._id}`}>{form?.title}</Link>
                       <p>{form?.end_date ? `Due on: ${form?.end_date}` : `Created on: ${form?.createdAt}`}</p>
                     </div>
                   </div>

@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import FormListing from './pages/FormListing.jsx'
 import FormBuilder from './pages/FormBuilder.jsx'
 import Home from './pages/Home.jsx'
+import AddEditDynamicForm from './pages/AddEditDynamicForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/form/create",
     element: <FormBuilder />
+  },
+  {
+    path: "/form/:action/:formId",
+    element: <AddEditDynamicForm />
   }
 ]);
 

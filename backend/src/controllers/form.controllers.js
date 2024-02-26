@@ -1,6 +1,7 @@
 import Form from "../models/form.model.js";
 import FormType from "../models/formtype.model.js";
 import FormCategory from "../models/formcategory.model.js";
+import FormResponse from "../models/formresponse.models.js";
 import { asyncHandler } from "../helpers/asyncHandler.js";
 import moment from "moment";
 import mongoose from "mongoose";
@@ -126,6 +127,36 @@ const getAllForms = asyncHandler(async (req, res) => {
   });
 }); 
 
+const getFormById = asyncHandler(async (req, res) => {
+
+  const { formId } = req.params;
+
+  let form = JSON.parse(JSON.stringify(await Form.findById(formId).select({
+    _id: 1,
+    title: 1,
+    fields: 1,
+    end_date: 1
+  })));
+
+  form = [form].map(item => {
+    let fields = item?.fields?.map(item => ({
+      ...item,
+      name: item?.label?.toLowerCase()?.split(" ")?.join("_")?.replaceAll("?", "")
+    }));
+    return {
+      ...item,
+      fields,
+      end_date: moment(item.end_date).format("DD/MM/YYYY")
+    }
+  });
+
+  return res.status(200)?.json({
+    success: true,
+    form: form?.[0],
+    msg: "Form data has been fetched successfully."
+  });
+});
+ 
 const createNewFormType = asyncHandler(async (req, res) => {
 
 
@@ -162,11 +193,44 @@ const getAllFormCategory = asyncHandler(async (req, res) => {
   });
 }); 
 
+const addNewFormResponse = asyncHandler(async (req, res) => {
+
+  const { content, formId } = req.body;
+
+  let obj = {
+    content,
+    formId
+  };
+
+  let newResponse = await FormResponse.create(obj);
+
+  if(!newResponse)
+    throw new Error("Unable to create new form response!");
+
+  return res.status(201)?.json({
+    success: true,
+    response: newResponse,
+    msg: "Form response has been added successfully."
+  });
+});
+
+const viewAllFormResponses = asyncHandler(async (req, res) => {
+
+});
+
+const getFormResponseById = asyncHandler(async (req, res) => {
+
+});
+
 export {
   createNewForm,
   getAllForms,
   createNewFormType,
   getAllFormTypes,
   createNewFormCategory,
-  getAllFormCategory
+  getAllFormCategory,
+  getFormById,
+  addNewFormResponse,
+  viewAllFormResponses,
+  getFormResponseById
 }
